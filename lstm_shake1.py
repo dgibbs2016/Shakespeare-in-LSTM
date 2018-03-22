@@ -1,4 +1,6 @@
-s'''Example script to generate text from Shakespeare's writings.
+
+'''Example script to generate text from Shakespeare's writings.
+
 
 At least 20 epochs are required before the generated text
 starts sounding coherent.
@@ -9,9 +11,11 @@ networks are quite computationally intensive.
 If you try this script on new data, make sure your corpus
 has at least ~100k characters. ~1M is better.
 '''
-# initial version for Shakespeare
-# backend is TensorFlow
-# hooks added for TensorBoard
+
+# 4th version Shakespeare
+=======
+
+
 
 from __future__ import print_function
 from keras.models import Sequential
@@ -56,11 +60,12 @@ for i, sentence in enumerate(sentences):
 # build the model: a single LSTM
 print('Build model...')
 model = Sequential()
-model.add(LSTM(128, input_shape=(maxlen, len(chars))))
+# try LSTM dropout=0.5 for regularization, keep units=128
+model.add(LSTM(128, dropout=0.5, input_shape=(maxlen, len(chars))))
 model.add(Dense(len(chars)))
 model.add(Activation('softmax'))
-
-optimizer = RMSprop(lr=0.01)
+# add clipvalue=10 to deal with excessive gradients
+optimizer = RMSprop(lr=0.01, clipvalue=10)
 model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 
 #set up FileWriter for TensorBoard
