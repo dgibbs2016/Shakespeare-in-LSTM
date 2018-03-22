@@ -1,4 +1,6 @@
+
 '''Example script to generate text from Shakespeare's writings.
+
 
 At least 20 epochs are required before the generated text
 starts sounding coherent.
@@ -9,7 +11,11 @@ networks are quite computationally intensive.
 If you try this script on new data, make sure your corpus
 has at least ~100k characters. ~1M is better.
 '''
+
 # 4th version Shakespeare
+=======
+
+
 
 from __future__ import print_function
 from keras.models import Sequential
@@ -64,7 +70,7 @@ model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 
 #set up FileWriter for TensorBoard
 graph = K.get_session().graph
-file_writer = tf.summary.FileWriter('/home/yyyyy/work', graph)
+file_writer = tf.summary.FileWriter('/home/yyyy/work', graph)
 
 def sample(preds, temperature=1.0):
     # helper function to sample an index from a probability array
